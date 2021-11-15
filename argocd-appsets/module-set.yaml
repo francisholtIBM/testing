@@ -15,7 +15,7 @@ spec:
         url: https://kubernetes.default.svc
   template:
     metadata:
-      name: infra-machineset
+      name: infra-machineset-{{cluster}}
       namespace: openshift-gitops
     spec:
       destination:
