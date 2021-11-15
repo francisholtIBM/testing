@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: infra-machineset
+  namespace: openshift-gitops
+spec:
+  generators:
+  - list:
+      elements:
+      - cluster: zone1
+        url: https://kubernetes.default.svc
+      - cluster: zone2
+        url: https://kubernetes.default.svc
+      - cluster: zone3
+        url: https://kubernetes.default.svc
+  template:
+    metadata:
+      name: infra-machineset
+      namespace: openshift-gitops
+    spec:
+      destination:
+        server: https://kubernetes.default.svc
+      project: default
+      source:
+        path: infra-machineset/{{cluster}}
+        repoURL: https://github.com/francisholtIBM/testing
+        targetRevision: master
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: false
+        syncOptions:
+        - CreateNamespace=true
