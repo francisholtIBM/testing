@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: infra-machineset
+  name: infra-machineset1
   namespace: openshift-gitops
 spec:
   destination:
